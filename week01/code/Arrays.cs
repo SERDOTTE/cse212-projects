@@ -13,7 +13,18 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+
+        // Plan:
+        // 1. Create and allocate a new array of type double with the size especified by the 'length' parameter.
+        // 2. Craate and repeat loop (for) that goes from 0 to length - 1 and fills each element with the multiple of 'number'.
+        // 3. In each iteration of the loop, calculate the multiple of 'number' and assign it to the corresponding element in the array.
+        // 4. After the loop, return the array.
+        double[] result = new double[length];
+        for (int i = 0; i < length; i++)
+        {
+            result[i] = number * (i + 1);
+        }
+        return result; // replace this return statement with your own
     }
 
     /// <summary>
