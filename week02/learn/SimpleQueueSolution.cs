@@ -12,6 +12,9 @@
         Console.WriteLine(value);
         // Defect(s) Found: Trying to remove data from index 1 rather than 0
 
+        // The Solution: Since the underlying structure is a dynamic list with positions starting at index 0, 
+        // removing the element at the front requires explicitly accessing `_queue` and then executing `_queue.RemoveAt(0)`.
+
         Console.WriteLine("------------");
 
         // Test 2
@@ -30,6 +33,10 @@
         Console.WriteLine(value);
         // Defect(s) Found: The enqueue was inserting at the front of the queue
 
+        // The Solution: To adhere to the FIFO (First In, First Out) principle of a queue, 
+        // the Enqueue method must add new elements to the back of the collection. Using _queue.Add(value) 
+        // ensures that the value is inserted into the last available position in the dynamic list.
+
         Console.WriteLine("------------");
 
         // Test 3
@@ -46,6 +53,10 @@
         }
         // Defect(s) Found: None :)
     }
+
+        // The Solution: The conditional check at the beginning of Dequeue triggers the expected exception via `throw new IndexOutOfRangeException()`, 
+        // allowing the test's `try/catch` block to confirm the system's error handling.
+
 
     private readonly List<int> _queue = new();
 
