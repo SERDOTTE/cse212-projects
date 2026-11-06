@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+
+Console.WriteLine("\n======================\nSimple Queue\n======================");
+var queue = new Queue<int>();             // Queue: []
+queue.Enqueue(1);                         // Queue: [1]
+queue.Enqueue(2);                         // Queue: [1, 2]
+queue.Enqueue(3);                         // Queue: [1, 2, 3]
+queue.Dequeue();                          // Queue: [2, 3] (removed 1)
+queue.Dequeue();                          // Queue: [3] (removed 2)
+queue.Enqueue(4);                         // Queue: [3, 4]
+queue.Enqueue(5);                         // Queue: [3, 4, 5]
+queue.Dequeue();                          // Queue: [4, 5] (removed 3)
+queue.Enqueue(6);                         // Queue: [4, 5, 6]
+queue.Enqueue(7);                         // Queue: [4, 5, 6, 7]
+queue.Enqueue(8);                         // Queue: [4, 5, 6, 7, 8]
+queue.Enqueue(9);                         // Queue: [4, 5, 6, 7, 8, 9]
+queue.Dequeue();                          // Queue: [5, 6, 7, 8, 9] (removed 4)
+queue.Dequeue();                          // Queue: [6, 7, 8, 9] (removed 5)
+queue.Enqueue(10);                        // Queue: [6, 7, 8, 9, 10]
+queue.Dequeue();                          // Queue: [7, 8, 9, 10] (removed 6)
+queue.Dequeue();                          // Queue: [8, 9, 10] (removed 7)
+queue.Dequeue();                          // Queue: [9, 10] (removed 8)
+queue.Enqueue(11);                        // Queue: [9, 10, 11]
+queue.Enqueue(12);                        // Queue: [9, 10, 11, 12]
+queue.Dequeue();                          // Queue: [10, 11, 12] (removed 9)
+queue.Dequeue();                          // Queue: [11, 12] (removed 10)
+queue.Dequeue();                          // Queue: [12] (removed 11)
+queue.Enqueue(13);                        // Queue: [12, 13]
+queue.Enqueue(14);                        // Queue: [12, 13, 14]
+queue.Enqueue(15);                        // Queue: [12, 13, 14, 15]
+queue.Enqueue(16);                        // Queue: [12, 13, 14, 15, 16]
+queue.Dequeue();                          // Queue: [13, 14, 15, 16] (removed 12)
+queue.Dequeue();                          // Queue: [14, 15, 16] (removed 13)
+queue.Dequeue();                          // Queue: [15, 16] (removed 14)
+queue.Enqueue(17);                        // Queue: [15, 16, 17]
+queue.Enqueue(18);                        // Queue: [15, 16, 17, 18]
+queue.Dequeue();                          // Queue: [16, 17, 18] (removed 15)
+queue.Enqueue(19);                        // Queue: [16, 17, 18, 19]
+queue.Enqueue(20);                        // Queue: [16, 17, 18, 19, 20]
+queue.Dequeue();                          // Queue: [17, 18, 19, 20] (removed 16)
+queue.Dequeue();                          // Queue: [18, 19, 20] (removed 17)
+
+Console.WriteLine("Final contents:");
+Console.WriteLine(String.Join(", ", queue.ToArray())); // Prints: 18, 19, 20
