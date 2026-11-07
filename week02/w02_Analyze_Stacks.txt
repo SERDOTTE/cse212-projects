@@ -1,0 +1,55 @@
+1. Problem 1: MysteryStack1
+
+Solution to Input Exercises
+Input 1: "racecar"
+Pushing: The top of the stack ends at the final 'r'.
+Popping: 'r', 'a', 'c', 'e', ​​'c', 'a', 'r'.
+Result: "racecar" – the reversal results in the word itself.
+
+Input 2: "stressed"
+Pushing: The letters are added in the order: s, t, r, e, s, s, e, d.
+Popping: Removed from right to left: d, e, s, s, e, r, t, s.
+Result: "desserts"
+
+Input 3: "a nut for a jar of tuna"
+Pushing: All characters, including spaces, are pushed onto the stack in the order they are read.
+Popping: From the last character to the first, preserving the positions of the spaces (now inverted):
+Result: "anut fo raj a rof tun a"
+
+2. Problem 2: MysteryStack2
+
+- If the token is a number, it is pushed onto the stack.
+- If the token is an operator, the last two numbers are popped from the stack, the operation is performed, and the result is pushed back onto the stack.
+
+The 12C financial calculator uses this principle. Resolution of Inputs:
+
+- Input 1: "5 3 7 + *"
+5: Is a number - Push to stack
+3: Is a number - Push to stack
+7: Is a number - Push to stack
++: Is an operator - Pop op2 = 7 and op1 = 3.
+Calculate 3 + 7 = 10 and push the result - Push to stack
+*: Is an operator - Pop op2 = 10 and op1 = 5. Calculate 5 * 10 = 50 and push the result
+Final Result: 50 (or 50.0)
+
+- Input 2: "6 2 + 5 3 - /"
+6: Is a number - Push to stack
+2: Is a number - Push to stack
++: Operator - op2 = 2, op1 = 6. 6 + 2 = 8 - Push to stack
+5: Is a number - Push to stack
+3: Is a number - Push to stack
+-: Operator - op2 = 3, op1 = 5. 5 - 3 = 2 - Push to stack
+/: Operator - op2 = 2, op1 = 8. 8 / 2 = 4 - Push to stack
+Final Result: 4 (or 4.0)
+
+3. Analysis of Error Scenarios in MysteryStack2
+
+Invalid Case 1!: Occurs when an operator (+, -, *, /) is encountered, 
+                 but the stack contains fewer than 2 operands (stack.Count < 2)
+
+Invalid Case 2!: Occurs when the second operand of a division is zero (op2 == 0), preventing division by z.ero
+
+Invalid Case 3!: Occurs when an input item is neither an operator, a valid number, nor an empty string.
+
+Invalid Case 4!: Occurs at the end of processing if the stack contains more than one element (stack.Count != 1), 
+                 indicating that there were numbers left over, without enough operators to process them.
