@@ -1,0 +1,31 @@
+The `DoSomethingComplicated` method implements an algorithm to verify that symbols are balanced.
+
+It iterates through the string, character by character.
+
+If it encounters an opening delimiter (`(`, `[`, `{`), it adds (pushes) it onto a `Stack<char>` structure.
+
+If it encounters a closing delimiter (`)`, `]`, `}`), it checks whether the stack is non-empty and whether the top of the stack matches the corresponding opening delimiter. 
+If there is no match, or if the stack is empty, the method immediately returns `false`.
+
+At the end of the loop, if the stack is empty (`stack.Count == 0`), it means all delimiters have been correctly opened and closed, and the method returns `true`. 
+Otherwise, it returns `false`.
+
+1. Input: (a == 3 or (b == 5 and c == 6))
+
+Analysis:
+The first ( is stacked.
+The second (inner) is stacked.
+The two ) close the parentheses in the correct reverse order (LIFO - Last-In, First-Out).
+In the end, the stack is empty.
+
+Result: Returns true.
+
+2. Input: (students]i].Grade > 80 and students[i].Grade < 90)
+
+Analysis:
+The initial ( is stacked (stack contains: ().
+The code advances until it encounters the ] character. As it is a bracket closure, the algorithm compares it to the top of the stack. 
+The top of the stack contains (, but the expected closing with ] would be [.
+This causes the condition (stack.Pop() != '[') to fail.
+Result: Returns false.
+Stack contents at the time of failure: The stack contained only the character (.

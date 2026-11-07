@@ -1,3 +1,94 @@
-﻿Console.WriteLine("\n======================\nCustomer Service\n======================");
+using System;
+using System.Collections.Generic;
+
+// /// <summary>
+// /// Maintain a Customer Service Queue.
+// /// </summary>
+// public class CustomerService
+// {
+//     public static void Run()
+//     {
+//         Console.WriteLine("Customer Service Tests");
+
+//         // Testes serão executados aqui.
+//     }
+
+//     private readonly List<Customer> _queue = new();
+//     private readonly int _maxSize;
+
+//     public CustomerService(int maxSize)
+//     {
+//         if (maxSize <= 0)
+//             _maxSize = 10;
+//         else
+//             _maxSize = maxSize;
+//     }
+
+//     private class Customer
+//     {
+//         public Customer(string name, string accountId, string problem)
+//         {
+//             Name = name;
+//             AccountId = accountId;
+//             Problem = problem;
+//         }
+
+//         private string Name { get; }
+//         private string AccountId { get; }
+//         private string Problem { get; }
+
+//         public override string ToString()
+//         {
+//             return $"{Name} ({AccountId}) : {Problem}";
+//         }
+//     }
+
+//     private void AddNewCustomer()
+//     {
+//         // Correction 1: Check if the queue is full
+//         if (_queue.Count >= _maxSize)
+//         {
+//             Console.WriteLine("Maximum Number of Customers in Queue.");
+//             return;
+//         }
+
+//         Console.Write("Customer Name: ");
+//         var name = Console.ReadLine()!.Trim();
+
+//         Console.Write("Account Id: ");
+//         var accountId = Console.ReadLine()!.Trim();
+
+//         Console.Write("Problem: ");
+//         var problem = Console.ReadLine()!.Trim();
+
+//         var customer = new Customer(name, accountId, problem);
+//         _queue.Add(customer);
+//     }
+
+//     private void ServeCustomer()
+//     {
+//         // Correction 2: Check if the queue is empty
+//         if (_queue.Count == 0)
+//         {
+//             Console.WriteLine("No customers in queue.");
+//             return;
+//         }
+
+//         // Correction 3: Display the first customer before removing it
+//         var customer = _queue[0];
+
+//         _queue.RemoveAt(0);
+
+//         Console.WriteLine(customer);
+//     }
+
+//     public override string ToString()
+//     {
+//         return $"[size={_queue.Count} max_size={_maxSize} => "
+//             + string.Join(", ", _queue) + "]";
+//     }
+// }
+
+Console.WriteLine("\n======================\nCustomer Service\n======================");
 CustomerService.Run();
 // CustomerServiceSolution.Run();
