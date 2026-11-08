@@ -12,6 +12,8 @@ public class TakingTurnsQueueTests
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
+    // The condition 'person.Turns > 1' prevents participants with exactly 1 turn remaining from returning to the queue to use their final turn, 
+    // causing them to exit prematurely."
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -44,6 +46,8 @@ public class TakingTurnsQueueTests
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
     // Defect(s) Found: 
+    //The error occurs on the 4th call, when Bob should return to the queue after using his penultimate turn, 
+    // but the condition 'Turns > 1' prevents him from doing so."
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -86,6 +90,9 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
+    // Individuals with 0 turns (infinite) are prematurely removed from the queue because the condition only checks for Turns > 1. 
+    // Furthermore, the logic fails to preserve the original counter value—keeping it as infinite (<= 0)—instead decrementing it.
+
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -117,6 +124,8 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
     // Defect(s) Found: 
+    // Same defect as in ForeverZero. Negative turn values ​​(representing infinite turns) fail the "Turns > 1" condition, 
+    // causing the player to be removed from the queue after the first turn instead of being kept in it.
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
@@ -144,6 +153,8 @@ public class TakingTurnsQueueTests
     // Scenario: Try to get the next person from an empty queue
     // Expected Result: Exception should be thrown with appropriate error message.
     // Defect(s) Found: 
+    // None (this test was already passing successfully from the start, as the exception was being thrown correctly).
+    
     public void TestTakingTurnsQueue_Empty()
     {
         var players = new TakingTurnsQueue();
