@@ -24,7 +24,7 @@ public class TakingTurnsQueue
     public void AddPerson(string name, int turns)
     {
         var person = new Person(name, turns);
-        _people.Enqueue(person);
+        EnqueueAtBack(person);
     }
 
     /// <summary>
@@ -34,22 +34,52 @@ public class TakingTurnsQueue
     /// person has an infinite number of turns.  An error exception is thrown 
     /// if the queue is empty.
     /// </summary>
-    public Person GetNextPerson()
+public Person GetNextPerson()
+{
+    if (_people.IsEmpty())
     {
-        if (_people.IsEmpty())
-        {
-            throw new InvalidOperationException("No one in the queue.");
-        }
-        else
-        {
-            Person person = _people.Dequeue();
-            if (person.Turns > 1)
-            {
-                person.Turns -= 1;
-                _people.Enqueue(person);
-            }
+        throw new InvalidOperationException("No one in the queue.");
+    }
 
-            return person;
+    Person person = _people.Dequeue();
+
+    if (person.Turns <= 0)
+    {
+        // Turnos infinitos: volta para a fila sem decrementar.
+        EnqueueAtBack(person);
+    }
+    else
+    {
+        // Turnos finitos: decrementa um turno.
+        person.Turns--;
+
+        // Volta para a fila somente se ainda tiver turnos.
+        if (person.Turns > 0)
+        {
+            EnqueueAtBack(person);
+        }
+    }
+
+    return person;
+}
+
+// Adiciona a pessoa ao final lógico da fila.
+    // Adapta o Enqueue original, que insere no início.
+    private void EnqueueAtBack(Person person)
+    {
+        var currentPeople =
+            new System.Collections.Generic.List<Person>();
+
+        while (!_people.IsEmpty())
+        {
+            currentPeople.Add(_people.Dequeue());
+        }
+
+        _people.Enqueue(person);
+
+        for (int i = currentPeople.Count - 1; i >= 0; i--)
+        {
+            _people.Enqueue(currentPeople[i]);
         }
     }
 
