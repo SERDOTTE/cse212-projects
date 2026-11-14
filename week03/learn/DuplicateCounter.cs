@@ -23,8 +23,19 @@
     }
 
     private static int CountDuplicates(int[] data)
+    {  // Method for counting unique duplicates in a data collection
+        var seen = new HashSet<int>();  // Set for tracking items already seen
+        var duplicates = new HashSet<int>();  // Set for tracking unique duplicates
+
+    foreach (var item in data)  // Iterate through each item in the data collection
     {
-        // Add code here.
-        return 0;
+        // If it has been seen before, add it to the set of unique duplicates
+        if (!seen.Add(item))  // If it could not be added to the set of viewed items, it means it is a duplicate.
+        {
+            duplicates.Add(item); // Add the duplicate item to the set of unique duplicates
+        }
+    }
+        
+        return duplicates.Count;  // Return the number of unique duplicates found in the data collection
     }
 }
