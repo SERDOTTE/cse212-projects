@@ -1,0 +1,42 @@
+1. Possible Scenarios to Consider:
+
+- No duplicates: A string where all characters are unique (e.g., "abcdef"), ensuring the solution correctly identifies that no duplication occurs.
+- Early duplicate: A string where the duplication happens near the beginning (e.g., "aab" or "banana"), verifying that the algorithm stops or records the first occurrence efficiently.
+- Late duplicate: A string where the duplicate character appears far into the sequence (e.g., "abcdefgfa"), confirming it scans far enough before finding the match.
+- Consecutive vs. non-consecutive duplicates: Strings with adjacent repeating characters (e.g., "hello" for 'l') versus characters separated by other letters (e.g., "level" for 'l'), ensuring the solution tracks seen characters globally rather than just looking at neighbors.
+
+
+
+2. Useful Data Structures and Their Performance:
+- HashSet (Set):
+    Purpose & Behavior: As you iterate through the string character by character, you can store each visited character in a HashSet. 
+                        Before adding a character, you check if it already exists in the set. The first character already present is your answer.                       
+    Performance: Hash sets offer O(1) average time complexity for lookups and insertions. Traversing a string of length n results in an overall time 
+                complexity of O(n) and a space complexity of O(k) (where $k$ is the size of the character set).
+- Array / List (Alternative):
+    Performance: Using nested loops or searching through a list of past characters would degrade performance to O(n^2), which is less efficient for longer strings.
+
+
+
+3. Boundary Conditions to Consider:
+- Empty or single-character strings ("" or "a"): Strings with zero or one character cannot contain a duplicate, so the code must handle these safely without 
+  throwing out-of-bounds or null reference errors.
+- All identical characters ("aaaa"): Ensures the algorithm correctly catches the duplication at the very first possible transition point (index 1).
+- Case sensitivity and special characters: Deciding whether 'A' and 'a' should be treated as duplicates, and how spaces, punctuation, or unicode characters are handled.
+
+
+4. Outline a Possible Solution:
+- Initialization:
+        Create a `HashSet<char>` (or an empty set) named `seenCharacters` to store the characters as we encounter them.
+
+- Iteration:
+        Traverse the input string character by character (from left to right, ensuring we identify the first character that repeats).
+
+- Check and Record:
+        * For each current character:
+                    Check if it is already present in `seenCharacters`.
+                    If it is, it means we have found the first duplicate! Immediately return that character (or its index).
+                    If it is not, add the character to `seenCharacters` and continue the loop.
+
+- Base Case (No duplicates):
+        If the loop finishes without finding any repetitions, return an indicative value (such as a null character `\0` or an indicator that no duplicates exist).
