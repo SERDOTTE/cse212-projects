@@ -11,7 +11,12 @@ public class Translator
         Console.WriteLine(englishToGerman.Translate("Train")); // ???
     }
 
+    // The main Map for mapping the source word to the translation
     private Dictionary<string, string> _words = new();
+
+    // Optional: Sets for tracking the unique known vocabulary (ensuring uniqueness)    
+    private HashSet<string> _sourceWords = new();
+    private HashSet<string> _targetWords = new();
 
     /// <summary>
     /// Add the translation from 'from_word' to 'to_word'
@@ -24,7 +29,12 @@ public class Translator
     /// <returns>fixed array of divisors</returns>
     public void AddWord(string fromWord, string toWord)
     {
-        // ADD YOUR CODE HERE
+        // Record the relationship in the Map
+        _words[fromWord] = toWord;
+
+        // Record the words in the sets for tracking unique vocabulary  
+        _sourceWords.Add(fromWord);
+        _targetWords.Add(toWord);
     }
 
     /// <summary>
@@ -34,7 +44,13 @@ public class Translator
     /// <returns>The translated word or "???" if no translation is available</returns>
     public string Translate(string fromWord)
     {
-        // ADD YOUR CODE HERE
-        return "";
+        // Uses the Map search concept (TryGetValue)
+        if (_words.TryGetValue(fromWord, out var translation))
+        {
+            return translation;
+        }
+
+        // In case the word does not exist in the dictionary
+        return "???";  // Return "???" if the word is not found in the dictionary
     }
 }
