@@ -1,0 +1,17 @@
+Code Analysis
+
+1. Meeting O(n) Time Complexity:
+- Creating the HashSet: The line `new HashSet<string>(words)` iterates through the array once to populate the set, taking O(n) time.
+- Constant-Time Lookup: Within the `foreach` loop, the `wordSet.Contains(inverse)` operation has O(1) complexity. Since the loop runs `n` times, the overall processing remains O(n).
+
+2. Handling Special Cases (Repeated Characters, e.g., "aa"):
+- Words consisting of identical characters (such as "aa") should not form pairs with anything and must be ignored.
+- The line `if (word == word3) continue;` addresses this rule.
+
+3. Preventing Duplicates in the Result:
+- The check `if (word < word3)`:
+For the word "am"—since 'a' < 'm'—the code checks if "ma" exists and adds "am & ma" to the list.
+
+When the loop reaches the word "ma", the condition 'm' < 'a' evaluates to `false`, preventing the inverted pair "ma & am" from being added as a duplicate in the final result.
+
+4. The initial check `if (words == null || words.Length == 0)` prevents `NullReferenceException` errors and ensures an empty array is returned appropriately.
