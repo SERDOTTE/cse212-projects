@@ -1,0 +1,11 @@
+Explanation of the Solution
+
+The task requires reading a file and creating a dictionary that groups the count of people by their level of education, which is found in the 4th column.
+
+Since indexing in C# begins at 0, accessing `fields[3]` correctly refers to the 4th column of the row.
+
+The check using `ContainsKey` follows the structure we learned in the lesson on dictionaries for building summary tables and frequency counts.
+
+The use of `string.IsNullOrWhiteSpace(line)` ensures that empty lines in the file are ignored.
+
+The check `if (fields.Length < 4)` prevents "index out of range" exceptions (`IndexOutOfRangeException`) in the event of a malformed row.
