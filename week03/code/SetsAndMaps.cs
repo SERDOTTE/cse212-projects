@@ -105,8 +105,64 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        
+        //Using a null check:
+        if (word1 == null || word2 == null)  
+        {
+            return false;
+        }
+
+        // Convert to lowercase and remove spaces
+        string cleanedWord1 = word1.ToLower().Replace(" ", "");
+        string cleanedWord2 = word2.ToLower().Replace(" ", "");
+
+        // If the lengths are different, they cannot be anagrams
+        if (cleanedWord1.Length != cleanedWord2.Length)
+        {
+            return false;
+        }
+
+        // Create a dictionary to count letter frequencies in word1
+        Dictionary<char, int> letterCount = new Dictionary<char, int>();
+        
+        // Count each letter in word1
+        foreach (char letter in cleanedWord1)
+        {
+            if (letterCount.ContainsKey(letter))
+            {
+                letterCount[letter]++;
+            }
+            else
+            {
+                letterCount[letter] = 1;
+            }
+        }
+
+        // Check if word2 has the same letters with the same frequency
+        foreach (char letter in cleanedWord2)
+        {
+            if (!letterCount.ContainsKey(letter))
+            {
+                return false;
+            }
+
+            letterCount[letter]--;
+            if (letterCount[letter] < 0)
+            {
+                return false;
+            }
+        }
+
+        // Check if all counts are zero (all letters matched)
+        foreach (var count in letterCount.Values)
+        {
+            if (count != 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>

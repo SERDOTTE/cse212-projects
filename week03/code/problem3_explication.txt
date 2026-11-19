@@ -1,0 +1,19 @@
+Explanation of the Solution
+
+Instead of sorting the strings (which would take O(n log n) time), I used a dictionary (a frequency table) to count the occurrences of each character.
+This reduces the time complexity to O(n).
+
+- Null reference protection: ensures the program does not crash if any of the variables are null.
+
+- Normalization: converts all characters to lowercase and removes all whitespace.
+
+- Quick length comparison: if the cleaned words do not have the same number of characters, they cannot possibly be anagrams. The code terminates immediately, returning `false` in O(1) time.
+
+- Building the frequency table: iterates through each character of the first word and records its frequency in a dictionary (`letterCount`).
+
+- Validation using the second word: iterates through the second word and decrements the count for each character encountered.
+
+- If a character is found that does not exist in the dictionary, the method returns `false`.
+- If the count for any character drops below 0 (indicating that the letter appeared more times in the second word than in the first), the method returns `false`.
+
+- Final confirmation: verifies that all counts have returned to zero. Since all values ​​are 0, the method returns `true`—confirming that the words are anagrams.

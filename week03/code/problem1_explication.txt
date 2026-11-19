@@ -1,4 +1,4 @@
-Code Analysis
+Explanation of the Solution
 
 1. Meeting O(n) Time Complexity:
 - Creating the HashSet: The line `new HashSet<string>(words)` iterates through the array once to populate the set, taking O(n) time.
