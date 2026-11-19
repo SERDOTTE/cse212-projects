@@ -1,0 +1,13 @@
+Explanation of the Solution
+
+To fix the issue, changes were required in two files.
+
+In `FeatureCollection.cs`, the classes represent the data received from the earthquake service: `FeatureCollection` holds the list, `Feature` represents an individual earthquake, and `FeatureProperties` stores the location and magnitude.
+
+In `SetsAndMaps.cs`, the `EarthquakeDailySummary` method queries the service, reads the data in JSON format, and maps it into these classes. It then verifies that the list and the properties exist, iterates through the earthquakes, and creates a description for each—for example, "Location - Mag 4.5."
+
+It returns these descriptions as an array.
+
+Previously, the method always returned an empty array (`return [];`), which caused the test to fail. With the change, it now returns the earthquakes received from the service.
+
+It maps the root object of the GeoJSON response, which contains the collection of earthquakes.
