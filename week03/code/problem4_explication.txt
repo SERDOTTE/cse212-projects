@@ -1,0 +1,77 @@
+Explanation of the Solution
+
+The `Maze` class represents a digital maze in which one moves from position to position. The maze is stored in a dictionary that maps coordinates to possible moves.
+
+- Instance Variables (Private Fields)
+
+Variable	Type	                            Purpose
+_mazeMap	Dictionary<(int, int), bool[]>	    Stores the maze map. The key is the (x, y) coordinate, and the value is an array of 4 booleans.
+_currX	    int	                                The player's current X position (starts at 1).
+_currY	    int	                                The player's current Y position (starts at 1).
+
+
+- Dictionary Structure (ValueTuple)
+
+Key: (x, y)  →  Value: [left, right, up, down]
+                        [0]    [1]   [2]  [3]
+
+Example for position (1, 1):
+
+(1, 1) → [false,    true,       false,      true]
+            ↓       ↓           ↓           ↓
+            left    right       up          down
+            (wall)  (OK)        (wall)      (OK)
+
+This means:
+
+❌ Cannot move left (wall)
+✅ Can move right
+❌ Cannot move up (wall)
+✅ Can move down
+
+- Constructor
+- A dictionary containing the maze map.
+- Stores the map in the `_mazeMap` variable.
+- `readonly` means that `_mazeMap` cannot be reassigned once it has been initialized.
+
+- Movement Methods (Pattern)
+All 4 methods (`MoveLeft`, `MoveRight`, `MoveUp`, `MoveDown`) follow the same pattern:
+
+
+- Comparison of the 4 Methods
+Method	Index	Coordinate	Result
+MoveLeft()	[0]	_currX-- (decrease X)
+MoveRight()	[1]	_currX++ (increase X)
+MoveUp()	[2]	_currY-- (decrease Y)
+MoveDown()	[3]	_currY++ (increase Y)
+
+
+- Helper Method - GetStatus()
+Returns: A string containing the current position
+
+
+- Error Handling
+The class uses exceptions for validation:
+
+            try
+            {
+            maze.MoveUp(); // If there is a wall, it throws an exception
+            }
+            catch (InvalidOperationException ex)
+            {
+            Console.WriteLine(ex.Message); // "Can't go that way!"
+            }
+
+- Key Concepts
+Concept	Meaning
+ValueTuple	A tuple of values ​​(x, y) used as a key in the dictionary
+Dictionary	A data structure that maps keys to values
+bool[]	An array of 4 booleans (left, right, up, down)
+readonly	The dictionary cannot be reassigned
+InvalidOperationException	An exception thrown when no movement is permitted
+
+
+- Private data stores the state (position and map)
+- Public methods control how the state can change
+- Validation ensures that no invalid moves occur
+- Encapsulation protects the integrity of the maze
