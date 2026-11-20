@@ -1,0 +1,36 @@
+Insert Tail code explication
+
+The goal is to insert a new element with a specified value at the end (the tail) of a doubly linked list.
+
+The major advantage of this method is that the insertion is performed in constant time, O(1), as the list maintains a direct reference to the last node, 
+eliminating the need to traverse all preceding elements.
+
+1. Instantiation of the New Node
+
+- Creates a new node in memory, storing the value received in the `value` parameter.
+
+- When a new node is instantiated, its `Next` and `Prev` pointers are initialized to point to `null`.
+
+2. Handling the Empty List Case
+
+- If the `_tail` variable is null, it means the list is completely empty and contains no nodes.
+
+- When we insert an item into an empty list, that single node becomes both the head and the tail of the list.
+
+- There is no need to adjust the `Next` or `Prev` pointers of any neighbors, as there are no neighbors.
+
+3. Insertion When the List Already Contains Elements (else) 
+- executes a 3-step structured process to connect the new node to the end of the chain:
+
+- newNode.Prev = _tail;
+Points the new node’s Prev pointer to the current tail.
+This establishes a link from the new node pointing backward toward the existing list.
+
+_tail.Next = newNode;
+Points the former tail’s Next pointer to the new node.
+This establishes a link from the existing list pointing forward toward the new node.
+
+_tail = newNode;
+Updates the class’s _tail control variable to reference the newNode.
+From this moment on, the system recognizes the newNode as the new, official last element of the list.
+
