@@ -1,0 +1,27 @@
+Remove Tail code explication
+
+Is responsible for removing the last element (the tail) from a doubly linked list
+
+1. Empty List or List with Only 1 Element
+
+(_head == _tail):
+- In a linked list, when the head and tail references are the same, there are two possibilities:
+
+        List with 1 node: Both _head and _tail point to exactly the same single node.
+
+        Empty List: Both _head and _tail are null.
+
+- Setting both to null removes the single existing node, transforming the structure into an empty list. If the list was already empty, it simply remains null.
+
+2. List with 2 or More Elements
+If the list contains more than one node, the code performs 2 steps to isolate and remove the last element:
+
+_tail.Prev!.Next = null;:
+        - accesses the reference to the second-to-last node in the list.
+        - the ! operator assures the compiler that we are certain _tail.Prev is not null.
+        - by assigning null to the Next field of the second-to-last node, the link pointing to the last node is broken.
+        - the second-to-last node now indicates that there are no further nodes following it.
+
+_tail = _tail.Prev;:
+        - Updates the class's _tail control variable so that it officially points to the second-to-last node.
+        - Since the old last node was disconnected and no variable points to it, it is discarded.
