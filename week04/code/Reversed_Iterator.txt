@@ -1,0 +1,13 @@
+Reversed Iterator code explication
+
+The goal is to traverse and iterate through a doubly linked list from back to front (from the tail toward the head).
+
+- The `IEnumerable` interface allows a method to be used directly within a `foreach` loop. 
+- Any collection that returns `IEnumerable` can be iterated over sequentially.
+
+- The pointer variable `curr` is initialized to point to the tail of the list—the last stored node. If the list is empty, `_tail` will be `null`, causing `curr` to start as `null`.
+
+- The loop continues as long as `curr` references a valid node. Once it moves past the head of the list, its `Prev` pointer becomes `null`, and the loop terminates.
+
+- `yield return`: This statement returns the data (`curr.Data`) of the current node to the caller without terminating the method's execution. The code "pauses" at this point and yields the value. 
+- When the external loop requests the next element, the method resumes execution exactly at the following line.

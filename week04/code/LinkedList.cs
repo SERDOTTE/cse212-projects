@@ -203,11 +203,16 @@ public class LinkedList : IEnumerable<int>
     /// <summary>
     /// Iterate backward through the Linked List
     /// </summary>
-    public IEnumerable Reverse()
+public IEnumerable Reverse()
+{
+    Node? curr = _tail;
+    while (curr is not null)
     {
-        // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+        yield return curr.Data;
+        curr = curr.Prev;
     }
+    
+}
 
     public override string ToString()
     {
