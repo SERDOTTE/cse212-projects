@@ -1,0 +1,36 @@
+Remove code explication
+
+The goal of finding and removing the first occurrence of a specific value (value) in a doubly linked list
+
+1. Initialization of the Linear Search
+
+- The auxiliary pointer `curr` begins by pointing to the first node in the list (`_head`).
+
+- If the list is empty (`_head == null`), `curr` will be `null` from the start, and the loop will not execute.
+
+2. Traversing the List
+- The `while` loop advances node by node, checking whether the `Data` field of the current node matches the value being searched for (`value`).
+
+- If the end of the list is reached (`curr == null`) without finding the value, the loop terminates normally, and the method finishes without making any changes to the structure.
+
+3. Handling the 3 Removal Scenarios
+Once the element is located (`curr.Data == value`), the code determines its position within the list:
+
+3.1 The node is at the Head (`curr == _head`)
+    - If the element to be removed is the first node in the list.
+    - `RemoveHead()` reassigns the head to the next node and clears the `Prev` pointer reference of the new first node.
+
+3.2 The node is at the tail (curr == _tail)
+    - If the element is the last node in the list, the method calls the RemoveTail() function, updates the tail to the second-to-last node (_tail = _tail.Prev), 
+    and disconnects the Next pointer of the new last node.
+
+3.3 The node is in the middle of the list (else)
+    - If the node is located between two other nodes, we do not change either `_head` or `_tail`. We simply bypass the `curr` node by having its neighboring nodes
+    point directly to each other.
+    - `curr.Prev!.Next = curr.Next;`: Takes the node preceding `curr` and sets its `Next` pointer to the node that follows `curr`.
+    - `curr.Next!.Prev = curr.Prev;`: Takes the node following `curr` and sets its `Prev` pointer to the node that precedes `curr`.
+
+4. Immediate Termination and Return
+- Once the removal is complete and the pointers have been adjusted, the `return;` statement immediately terminates the function's execution. 
+
+- If there are duplicate values ​​in the list, only the first node encountered will be removed.
